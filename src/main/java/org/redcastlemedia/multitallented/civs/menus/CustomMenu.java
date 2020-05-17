@@ -36,6 +36,13 @@ public abstract class CustomMenu {
     protected int size;
     private String name;
 
+    /**
+     * Creates the data that is to be passed into the menu
+     *
+     * @param civilian The associated Civilian that is opening the menu
+     * @param params A map of generic string data that will be used to create the menu
+     * @return Objects that will be used to create the menu
+     */
     public abstract Map<String, Object> createData(Civilian civilian, Map<String, String> params);
 
     public String beforeOpenMenu(Civilian civilian) {

@@ -1,11 +1,13 @@
 package org.redcastlemedia.multitallented.civs.civclass;
 
+import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.redcastlemedia.multitallented.civs.Civs;
 import org.redcastlemedia.multitallented.civs.ConfigManager;
 import org.redcastlemedia.multitallented.civs.items.ItemManager;
 import org.redcastlemedia.multitallented.civs.items.CVItem;
+import org.redcastlemedia.multitallented.civs.regions.Region;
 
 import java.io.File;
 import java.io.IOException;
@@ -121,9 +123,19 @@ public class ClassManager {
         }
         return null;
     }
+
+    public Set<CivClass> getAllCivClasses() {
+        Set<CivClass> returnSet = new HashSet<>();
+        for (Map.Entry<UUID, Set<CivClass>> entry : civClasses.entrySet()) {
+            returnSet.addAll(entry.getValue());
+        }
+        return returnSet;
+    }
+
     public CivClass createClass(UUID uuid, String type, int manaPerSecond, int maxMana) {
         return new CivClass(getNextId(), uuid, type, manaPerSecond, maxMana);
     }
+
     public CivClass createDefaultClass(UUID uuid) {
         String className = ConfigManager.getInstance().getDefaultClass();
         ClassType classType = (ClassType) ItemManager.getInstance().getItemType(className);
